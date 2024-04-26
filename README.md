@@ -16,37 +16,23 @@
 
 ### Frontend
 - cd frontend
-- yarn install
-- copy .env.example to .env
-- Complete the env vars using these env vars
-```
-NEXT_PUBLIC_BACKEND_URL=http://localhost:3001
-```
-- yarn start
+- npm install
+- npm start
 - visit http://localhost:3000
 
 ### Backend
 - cd backend
-- yarn install
+- npm install
 - cd docker
-- docker-compose up -d (if you are not linux user, make sure you run on WSL terminal. This command will automatically run mysql and phpmyadmin. Or you can run mysql and phpmyadmin using your own way)
+- docker-compose up -d
 - copy .env.example to .env
-- Complete the env vars using these env vars (if you run using the docker-compose. if not, just adjust with your own env vars)
-```
-APP_NAME=Backend Service - Linkz Test
-PORT=3001
-MYSQL_HOST=localhost
-MYSQL_DATABASE=linkzdb_test
-MYSQL_USER=admin
-MYSQL_PASSWORD=root
-```
-- yarn start
+- npm start
 
 ### Database Migration
 - cd backend
-- yarn migrate-up (for run migration)
-- yarn migrate-down (for undo migration)
+- npm migrate-up (for run migration)
+- npm migrate-down (for undo migration)
 
 ## Testing
 - cd backend
-- yarn test or yarn test:cov
+- npm test or npm test:cov

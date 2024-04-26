@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { API_BASE_URL } from './constants/apiContants';
 
 const Login = () => {
     const [username, usernameupdate] = useState('');
@@ -9,42 +10,15 @@ const Login = () => {
     const usenavigate=useNavigate();
 
     useEffect(()=>{
-sessionStorage.clear();
+        localStorage.clear();
     },[]);
-
-    const ProceedLogin = (e) => {
-        e.preventDefault();
-        if (validate()) {
-            ///implentation
-            // console.log('proceed');
-            fetch("http://localhost:3000/user/" + username).then((res) => {
-                return res.json();
-            }).then((resp) => {
-                //console.log(resp)
-                if (Object.keys(resp).length === 0) {
-                    toast.error('Please Enter valid username');
-                } else {
-                    if (resp.password === password) {
-                        toast.success('Success');
-                        sessionStorage.setItem('username',username);
-                        sessionStorage.setItem('userrole',resp.role);
-                        usenavigate('/')
-                    }else{
-                        toast.error('Please Enter valid credentials');
-                    }
-                }
-            }).catch((err) => {
-                toast.error('Login Failed due to :' + err.message);
-            });
-        }
-    }
 
     const ProceedLoginusingAPI = (e) => {
         e.preventDefault();
         if (validate()) {
             let inputobj={"username": username,
             "password": password};
-            fetch("http://localhost:3001/api/users/login",{
+            fetch(API_BASE_URL+"/users/login",{
                 method:'POST',
                 headers:{'content-type':'application/json'},
                 body:JSON.stringify(inputobj)
@@ -54,9 +28,9 @@ sessionStorage.clear();
                 console.log(resp)
                 if(!resp.errors){
                     toast.success('Success');
-                    sessionStorage.setItem('username',username);
-                    sessionStorage.setItem('jwttoken',resp.jwtToken);
-                  usenavigate('/')
+                    localStorage.setItem('username',username);
+                    localStorage.setItem('token',resp.jwtToken);
+                    usenavigate('/')
                 }else{
                     toast.error('Login failed, invalid credentials');
                 }
@@ -76,6 +50,7 @@ sessionStorage.clear();
         }
         return result;
     }
+
     return (
         <div className="row">
             <div className="offset-lg-3 col-lg-6" style={{ marginTop: '100px' }}>
