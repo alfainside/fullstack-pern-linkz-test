@@ -34,12 +34,11 @@ NEXT_PUBLIC_BACKEND_URL=http://localhost:3000
 - Complete the env vars using these env vars (if you run using the docker-compose. if not, just adjust with your own env vars)
 ```
 APP_NAME=Backend Service - Linkz Test
-PORT=3000
+PORT=3001
 MYSQL_HOST=localhost
 MYSQL_DATABASE=linkzdb_test
 MYSQL_USER=admin
 MYSQL_PASSWORD=root
-JWT_TOKEN="asdfASDF1234!@#$"
 ```
 - yarn start
 
