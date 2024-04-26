@@ -3,7 +3,7 @@
 ## Tech Stack
 - NestJS (Typescript)
 - Postgresql
-- Sequelize
+- Prisma
 - ReactJs
 
 ## Prerequisites
@@ -23,7 +23,6 @@
 NEXT_PUBLIC_BACKEND_URL=http://localhost:3000
 ```
 - yarn start
-- visit http://localhost:3001
 
 ### Backend
 - cd backend
