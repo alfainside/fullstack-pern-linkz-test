@@ -20,10 +20,10 @@
 - copy .env.example to .env
 - Complete the env vars using these env vars
 ```
-NEXT_PUBLIC_BACKEND_URL=http://localhost:3000
+NEXT_PUBLIC_BACKEND_URL=http://localhost:3001
 ```
 - yarn start
-- visit http://localhost:3001
+- visit http://localhost:3000
 
 ### Backend
 - cd backend
