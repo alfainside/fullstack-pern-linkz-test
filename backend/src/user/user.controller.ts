@@ -6,6 +6,8 @@ import {
   Patch,
   Post,
   Delete,
+  UseGuards,
+  Req,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { WebResponse } from '../model/web.model';
@@ -17,6 +19,7 @@ import {
 } from '../model/user.model';
 import { Auth } from 'src/common/auth.decoration';
 import { User } from '@prisma/client';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller('/api/users')
 export class userController {
@@ -71,6 +74,19 @@ export class userController {
     await this.userService.logout(user);
     return {
       data: true,
+    };
+  }
+
+  @Get('/google/login')
+  @UseGuards(AuthGuard('google'))
+  async googleAuth() {}
+
+  @Get('auth/google/callback')
+  @UseGuards(AuthGuard('google'))
+  async googleAuthRedirect(@Req() req) {
+    const result = await this.userService.googleLogin(req);
+    return {
+      data: result,
     };
   }
 }

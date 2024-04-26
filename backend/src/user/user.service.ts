@@ -4,6 +4,7 @@ import { PrismaService } from '../common/prisma.service';
 import { ValidationService } from '../common/validation.service';
 import {
   LoginUserRequest,
+  RegisterOauth,
   RegisterUserRequest,
   UpdateUserRequest,
   UserResponse,
@@ -141,6 +142,58 @@ export class UserService {
     return {
       username: result.username,
       name: result.name,
+    };
+  }
+
+  async googleLogin(req) {
+    if (!req.user) {
+      return 'No user from google';
+    }
+
+    this.logger.info(`Login google // ${JSON.stringify(req.user)}`);
+    const reqs = {
+      name: req.user.firstName,
+      username: req.user.email,
+      password: '',
+    };
+
+    const registerOauth: RegisterOauth = this.validationService.validate(
+      UserValidation.REGISTER_OAUTH,
+      reqs,
+    );
+
+    let user = await this.prismaService.user.findUnique({
+      where: {
+        username: req.user.email,
+      },
+    });
+
+    registerOauth.name = req.user.firstName;
+    registerOauth.username = req.user.email;
+    registerOauth.password = '';
+    if (!user) {
+      user = await this.prismaService.user.create({
+        data: registerOauth,
+      });
+    }
+
+    user = await this.prismaService.user.update({
+      where: {
+        username: req.user.email,
+      },
+      data: {
+        token: uuid(),
+      },
+    });
+
+    /* return {
+      message: 'User Info from Google',
+      user: req.user,
+    }; */
+    return {
+      username: user.username,
+      name: user.name,
+      token: user.token,
     };
   }
 }

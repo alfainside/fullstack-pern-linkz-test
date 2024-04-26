@@ -16,4 +16,9 @@ export class UserValidation {
     name: z.string().min(1).max(100).optional(),
     password: z.string().min(1).max(100).optional(),
   });
+
+  static readonly REGISTER_OAUTH: ZodType = z.object({
+    username: z.string().min(1).max(100),
+    name: z.string().min(1).max(100),
+  });
 }

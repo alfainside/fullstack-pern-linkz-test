@@ -51,6 +51,32 @@ const Login = () => {
         return result;
     }
 
+    const ProceedLoginusingGoogle = (e) => {
+        let inputobj={
+            "username": username,
+            "password": password
+        };
+        fetch(API_BASE_URL+"/users/google/login",{
+            method:'POST',
+            headers:{'content-type':'application/json'},
+            body:JSON.stringify(inputobj)
+        }).then((res) => {
+            return res.json();
+        }).then((resp) => {
+            console.log(resp)
+            if(!resp.errors){
+                toast.success('Success');
+                localStorage.setItem('username',username);
+                localStorage.setItem('token',resp.jwtToken);
+                usenavigate('/')
+            }else{
+                toast.error('Login failed, invalid credentials');
+            }
+        }).catch((err) => {
+            toast.error('Login Failed due to :' + err.message);
+        });
+    }
+
     return (
         <div className="row">
             <div className="offset-lg-3 col-lg-6" style={{ marginTop: '100px' }}>
@@ -70,9 +96,20 @@ const Login = () => {
                             </div>
                         </div>
                         <div className="card-footer">
-                            <button type="submit" className="btn btn-primary">Login</button><br/>
+                            <button type="submit" className="btn btn-primary">Login</button> or 
+                            <button type="button" class="login-with-google-btn" 
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    window.location.href=API_BASE_URL+"/users/google/login";
+                                }} >
+                                Sign in with Google
+                            </button><br/>
+                            {/* <button type="button" class="login-with-google-btn" 
+                                onClick={ProceedLoginusingGoogle} >
+                                Sign in with Google
+                            </button><br/>
                             Don't have account ?
-                            <br/>
+                            <br/> */}
                             <Link to={'/register'}>Register</Link>
                         </div>
                     </div>

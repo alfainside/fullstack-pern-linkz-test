@@ -19,3 +19,9 @@ export class UpdateUserRequest {
   name?: string;
   password?: string;
 }
+
+export class RegisterOauth {
+  username: string;
+  name: string;
+  password: string;
+}

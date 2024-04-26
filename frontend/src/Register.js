@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { API_BASE_URL } from './constants/apiContants';
 
 const Register = () => {
 
-    const [id, idchange] = useState("");
+    const [username, usernamechange] = useState("");
     const [name, namechange] = useState("");
     const [password, passwordchange] = useState("");
     const navigate = useNavigate();
@@ -12,7 +13,7 @@ const Register = () => {
     const IsValidate = () => {
         let isproceed = true;
         let errormessage = 'Please enter the value in ';
-        if (id === null || id === '') {
+        if (username === null || username === '') {
             isproceed = false;
             errormessage += ' Username';
         }
@@ -35,10 +36,10 @@ const Register = () => {
 
     const handlesubmit = (e) => {
             e.preventDefault();
-            let regobj = { id, name, password };
+            let regobj = { username, name, password };
             if (IsValidate()) {
-            //console.log(regobj);
-            fetch("http://localhost:8000/user", {
+            console.log(regobj);
+            fetch(API_BASE_URL+"/users", {
                 method: "POST",
                 headers: { 'content-type': 'application/json' },
                 body: JSON.stringify(regobj)
@@ -64,7 +65,7 @@ const Register = () => {
                                 <div className="col-lg-6">
                                     <div className="form-group">
                                         <label>Username <span className="errmsg">*</span></label>
-                                        <input value={id} onChange={e => idchange(e.target.value)} className="form-control"></input>
+                                        <input value={username} onChange={e => usernamechange(e.target.value)} className="form-control"></input>
                                     </div>
                                 </div>
                                 <div className="col-lg-6">
