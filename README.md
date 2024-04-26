@@ -23,6 +23,7 @@
 NEXT_PUBLIC_BACKEND_URL=http://localhost:3000
 ```
 - yarn start
+- visit http://localhost:3001
 
 ### Backend
 - cd backend
@@ -32,16 +33,15 @@ NEXT_PUBLIC_BACKEND_URL=http://localhost:3000
 - copy .env.example to .env
 - Complete the env vars using these env vars (if you run using the docker-compose. if not, just adjust with your own env vars)
 ```
-APP_NAME=Backend Service - Telkom Sigma Technical Test
+APP_NAME=Backend Service - Linkz Test
 PORT=3000
 MYSQL_HOST=localhost
-MYSQL_DATABASE=telkom-sigma-technical-test
+MYSQL_DATABASE=linkzdb_test
 MYSQL_USER=admin
-MYSQL_PASSWORD=admin123
+MYSQL_PASSWORD=root
 JWT_TOKEN="asdfASDF1234!@#$"
 ```
 - yarn start
-- visit http://localhost:3000/api-docs for the API documentation
 
 ### Database Migration
 - cd backend
