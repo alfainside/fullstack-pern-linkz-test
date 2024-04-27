@@ -13,12 +13,18 @@ const Login = () => {
         // localStorage.clear();
         let urlString = new URL(window.location.href);
         let paramToken = urlString.searchParams.get("token");
+        let paramUsername = urlString.searchParams.get("username");
+        let paramName = urlString.searchParams.get("name");
+
         let token = localStorage.getItem('token');
         
         if(token){
             usenavigate('/');
         }else if(paramToken){
             localStorage.setItem('token',paramToken);
+            localStorage.setItem('username',paramUsername);
+            localStorage.setItem('name',paramName);
+
             usenavigate('/');
         }
         

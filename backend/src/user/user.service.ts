@@ -186,7 +186,9 @@ export class UserService {
       },
     });
 
-    return res.redirect(`http://localhost:3000/login?token=${tok}`);
+    return res.redirect(
+      `http://localhost:3000/login?token=${tok}&username=${req.user.email}&name=${req.user.firstName}`,
+    );
 
     /* return {
       message: 'User Info from Google',

@@ -13,17 +13,24 @@ const Appheader = () => {
             showmenuupdateupdate(true);
             let username = localStorage.getItem('username');
             if (username === '' || username === null) {
-                usenavigate('/login');
+                // usenavigate('/login');
             } else {
-                displayusernameupdate(username);
+                if(validateEmail(username)){
+                    displayusernameupdate(localStorage.getItem('name'));
+                }else{
+                    displayusernameupdate(username);
+                }
             }
         }
 
     }, [location])
-
+    const validateEmail = (email) => {
+        const re = /\S+@\S+\.\S+/;
+        return re.test(email);
+    };
     const LogoutProccess = () => {
         localStorage.clear();
-        usenavigate('/');
+        usenavigate('/login');
     }
 
     return (
