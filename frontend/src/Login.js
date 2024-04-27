@@ -10,7 +10,18 @@ const Login = () => {
     const usenavigate=useNavigate();
 
     useEffect(()=>{
-        localStorage.clear();
+        // localStorage.clear();
+        let urlString = new URL(window.location.href);
+        let paramToken = urlString.searchParams.get("token");
+        let token = localStorage.getItem('token');
+        
+        if(token){
+            usenavigate('/');
+        }else if(paramToken){
+            localStorage.setItem('token',paramToken);
+            usenavigate('/');
+        }
+        
     },[]);
 
     const ProceedLoginusingAPI = (e) => {
@@ -28,8 +39,8 @@ const Login = () => {
                 console.log(resp)
                 if(!resp.errors){
                     toast.success('Success');
-                    localStorage.setItem('username',username);
-                    localStorage.setItem('token',resp.jwtToken);
+                    localStorage.setItem('username',resp.data.username);
+                    localStorage.setItem('token',resp.data.token);
                     usenavigate('/')
                 }else{
                     toast.error('Login failed, invalid credentials');
@@ -52,22 +63,17 @@ const Login = () => {
     }
 
     const ProceedLoginusingGoogle = (e) => {
-        let inputobj={
-            "username": username,
-            "password": password
-        };
+      
         fetch(API_BASE_URL+"/users/google/login",{
-            method:'POST',
-            headers:{'content-type':'application/json'},
-            body:JSON.stringify(inputobj)
+            method:'GET',
         }).then((res) => {
             return res.json();
         }).then((resp) => {
             console.log(resp)
             if(!resp.errors){
                 toast.success('Success');
-                localStorage.setItem('username',username);
-                localStorage.setItem('token',resp.jwtToken);
+                localStorage.setItem('username',resp.data.username);
+                localStorage.setItem('token',resp.data.token);
                 usenavigate('/')
             }else{
                 toast.error('Login failed, invalid credentials');
@@ -107,9 +113,9 @@ const Login = () => {
                             {/* <button type="button" class="login-with-google-btn" 
                                 onClick={ProceedLoginusingGoogle} >
                                 Sign in with Google
-                            </button><br/>
+                            </button><br/> */}
                             Don't have account ?
-                            <br/> */}
+                            <br/>
                             <Link to={'/register'}>Register</Link>
                         </div>
                     </div>

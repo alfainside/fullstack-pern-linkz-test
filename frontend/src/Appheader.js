@@ -20,13 +20,23 @@ const Appheader = () => {
         }
 
     }, [location])
+
+    const LogoutProccess = () => {
+        localStorage.clear();
+        usenavigate('/');
+    }
+
     return (
         <div>
             {showmenu &&
                 <div className="header">
                     <Link to={'/'}>Home</Link>
                     <span style={{ marginLeft: '70%' }}>Welcome <b>{displayusername}</b></span>
-                    <Link style={{ float: 'right' }} to={'/login'}>Logout</Link>
+                    {/* <Link style={{ float: 'right' }} to={'/login'}>Logout</Link> */}
+                    <button type="button" className="btn btn-danger" style={{ float: 'right' }}
+                        onClick={LogoutProccess} >
+                        Logout
+                    </button>
                 </div>
             }
         </div>

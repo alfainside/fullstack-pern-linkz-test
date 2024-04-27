@@ -8,6 +8,7 @@ import {
   Delete,
   UseGuards,
   Req,
+  Res,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { WebResponse } from '../model/web.model';
@@ -83,8 +84,8 @@ export class userController {
 
   @Get('auth/google/callback')
   @UseGuards(AuthGuard('google'))
-  async googleAuthRedirect(@Req() req) {
-    const result = await this.userService.googleLogin(req);
+  async googleAuthRedirect(@Req() req, @Res() res) {
+    const result = await this.userService.googleLogin(req, res);
     return {
       data: result,
     };

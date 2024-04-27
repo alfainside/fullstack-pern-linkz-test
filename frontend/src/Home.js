@@ -6,20 +6,21 @@ const Home = () => {
     const [customerlist, listupdate] = useState(null);
    
     useEffect(() => {
-       
-
-        // let jwttoken = sessionStorage.getItem('jwttoken');
-        // fetch("https://localhost:44308/Customer", {
-        //     headers: {
-        //         'Authorization': 'bearer ' + jwttoken
-        //     }
-        // }).then((res) => {
-        //     return res.json();
-        // }).then((resp) => {
-        //     listupdate(resp);
-        // }).catch((err) => {
-        //     console.log(err.messsage)
-        // });
+        let token = localStorage.getItem('token');
+        if(!token){
+            usenavigate('/login');
+        }
+        /* fetch("https://localhost:44308/Customer", {
+            headers: {
+                'Authorization': 'bearer ' + jwttoken
+            }
+        }).then((res) => {
+            return res.json();
+        }).then((resp) => {
+            listupdate(resp);
+        }).catch((err) => {
+            console.log(err.messsage)
+        }); */
 
     }, []);
 

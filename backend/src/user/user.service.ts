@@ -145,7 +145,7 @@ export class UserService {
     };
   }
 
-  async googleLogin(req) {
+  async googleLogin(req, res) {
     if (!req.user) {
       return 'No user from google';
     }
@@ -176,24 +176,26 @@ export class UserService {
         data: registerOauth,
       });
     }
-
+    const tok = uuid();
     user = await this.prismaService.user.update({
       where: {
         username: req.user.email,
       },
       data: {
-        token: uuid(),
+        token: tok,
       },
     });
+
+    return res.redirect(`http://localhost:3000/login?token=${tok}`);
 
     /* return {
       message: 'User Info from Google',
       user: req.user,
     }; */
-    return {
+    /* return {
       username: user.username,
       name: user.name,
       token: user.token,
-    };
+    }; */
   }
 }
