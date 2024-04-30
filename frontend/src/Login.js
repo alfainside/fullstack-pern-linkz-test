@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { API_BASE_URL } from './constants/apiContants';
+import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google';
 
 const Login = () => {
     const [username, usernameupdate] = useState('');
@@ -108,18 +109,35 @@ const Login = () => {
                             </div>
                         </div>
                         <div className="card-footer">
-                            <button type="submit" className="btn btn-primary">Login</button> or 
-                            <button type="button" class="login-with-google-btn" 
+                            <button type="submit" className="btn btn-primary">Login</button> 
+                            {/* <button type="button" class="login-with-google-btn" 
                                 onClick={(e) => {
                                     e.preventDefault();
                                     window.location.href=API_BASE_URL+"/google/login";
                                 }} >
                                 Sign in with Google
-                            </button><br/>
-                            {/* <button type="button" class="login-with-google-btn" 
-                                onClick={ProceedLoginusingGoogle} >
-                                Sign in with Google
-                            </button><br/> */}
+                            </button> */}
+                            <div style={{
+                                marginTop: 10,
+                                textAlign: "center",
+                                maxWidth: "fit-content",
+                                marginLeft: "auto",
+                                marginRight: "auto"
+                            }}>
+                            <GoogleOAuthProvider clientId="60099894394-ehhe72hk5fjfrq6sl121o5h02k5rsnlr.apps.googleusercontent.com">
+                                <GoogleLogin
+                                    useOneTap={true}
+                                    onSuccess={async (credentialResponse) => {
+                                        console.log(credentialResponse);
+                                        window.location.href=API_BASE_URL+"/google/login";
+                                    }}
+                                    onError={() => {
+                                        console.log("Login Failed");
+                                    }}
+                                />
+                            </GoogleOAuthProvider>
+                            </div>
+                            <br/>
                             Don't have account ?
                             <br/>
                             <Link to={'/register'}>Register</Link>

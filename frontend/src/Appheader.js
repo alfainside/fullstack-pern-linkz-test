@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { API_BASE_URL } from './constants/apiContants';
+import { googleLogout } from "@react-oauth/google";
 
 const Appheader = () => {
     const [displayusername, displayusernameupdate] = useState('');
@@ -29,8 +31,10 @@ const Appheader = () => {
         return re.test(email);
     };
     const LogoutProccess = () => {
+        googleLogout();
         localStorage.clear();
         usenavigate('/login');
+        window.location.href='/login';
     }
 
     return (

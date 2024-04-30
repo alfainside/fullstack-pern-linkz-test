@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google';
 
 const Home = () => {
     const usenavigate = useNavigate();
@@ -29,6 +30,18 @@ const Home = () => {
         <div>
             
             <h1 className="text-center">Home page</h1>
+
+            {/* <GoogleOAuthProvider clientId="60099894394-ehhe72hk5fjfrq6sl121o5h02k5rsnlr.apps.googleusercontent.com">
+                <GoogleLogin
+                   onSuccess={async (credentialResponse) => {
+                        console.log(credentialResponse);
+                    }}
+                    onError={() => {
+                      console.log("Login Failed");
+                    }}
+                />
+            </GoogleOAuthProvider> */}
+            
             {/* <table className="table table-bordered">
                 <thead>
                     <tr>
