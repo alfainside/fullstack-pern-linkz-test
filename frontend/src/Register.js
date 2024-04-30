@@ -39,7 +39,7 @@ const Register = () => {
             let regobj = { username, name, password };
             if (IsValidate()) {
             console.log(regobj);
-            fetch(API_BASE_URL+"/users", {
+            fetch(API_BASE_URL+"/users/register", {
                 method: "POST",
                 headers: { 'content-type': 'application/json' },
                 body: JSON.stringify(regobj)
