@@ -112,7 +112,7 @@ const Login = () => {
                             <button type="button" class="login-with-google-btn" 
                                 onClick={(e) => {
                                     e.preventDefault();
-                                    window.location.href=API_BASE_URL+"/users/google/login";
+                                    window.location.href=API_BASE_URL+"/google/login";
                                 }} >
                                 Sign in with Google
                             </button><br/>

@@ -3,7 +3,7 @@
 ## Tech Stack
 - NestJS (Typescript)
 - Postgresql
-- Prisma
+- Mikrorm
 - ReactJs
 
 ## Prerequisites
@@ -26,12 +26,13 @@
 - cd docker
 - docker-compose up -d
 - copy .env.example to .env
-- npm start
+- npm run start
 
 ### Database Migration
 - cd backend
-- npm migrate-up (for run migration)
-- npm migrate-down (for undo migration)
+- npm run migrate-mikrorm-create (from create migration mikrorm)
+- npm run migrate-mikrorm-up (for run migration mikrorm)
+- npm run migrate-mikrorm-down (for undo migration mikrorm)
 
 ## Testing
 - cd backend
